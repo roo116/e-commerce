@@ -5,8 +5,8 @@
 
 // import important parts of sequelize library
 const { Model, DataTypes, DatabaseError } = require('sequelize');
-const { FOREIGNKEYS } = require('sequelize/types/lib/query-types');
-const { dateToString } = require('sqlstring');
+// const { FOREIGNKEYS } = require('sequelize/types/lib/query-types');
+// const { dateToString } = require('sqlstring');
 // import our database connection from config.js
 const sequelize = require('../config/connection');
 
