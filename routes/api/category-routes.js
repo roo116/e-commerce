@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
         attributes: ['product_name']
       }
     }
-  ).then(dbCatData=> res.json(dbCatData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+  ).then(dbCatData => res.json(dbCatData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 
   // be sure to include its associated Products
 });
