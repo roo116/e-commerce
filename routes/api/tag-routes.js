@@ -28,7 +28,10 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   Tag.findOne({
-    attributes: ['id', 'tag_name'],
+    // attributes: [
+    //   'id',
+    //   'tag_name'
+    // ],
     where: {
       id: req.params.id
     },
@@ -40,15 +43,16 @@ router.get('/:id', (req, res) => {
     }
   }).then(dbTagData => {
     if (!dbTagData) {
-      res.status(404).json({ message: 'Id not found' })
+      res.status(404).json({ message: 'Id not found' });
       return;
     }
-    res.json(dbTagData);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-  // be sure to include its associated Product data
+    res.json(dbTagData)
+  })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+
 });
 
 router.post('/', (req, res) => {
@@ -63,6 +67,21 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  Tag.update({
+    attributes:['tag_name'],
+    where: {
+      id: id.params.id
+    }
+  }).then(dbTagData => {
+    if(!dbTagData[0]) {
+      res.status(404).json({ message: 'ID not found'});
+      return;
+    }
+    res.json(dbTagData);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {
