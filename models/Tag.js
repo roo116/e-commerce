@@ -19,7 +19,8 @@ Tag.init(
     },
     // tag_name - string
     tag_name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {
