@@ -10,13 +10,16 @@ router.get('/', (req, res) => {
   // be sure to include its associated Category and Tag data
   Product.findAll({
     attributes: [
+      'id',
       'product_name',
+      'price',
+      'stock',
       'category_id'
     ],
     include: [
       {
         model: Category,
-        attributes: ['category_name'],
+        attributes: ['category_name']
       },
       {
         model: Tag,
@@ -25,14 +28,11 @@ router.get('/', (req, res) => {
         as: 'tags'
       }
     ]
-
-
   }).then(dbProdData => res.json(dbProdData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
-
 });
 
 
@@ -40,6 +40,41 @@ router.get('/', (req, res) => {
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
+  Product.findOne({
+    attributes: [
+      'id',
+      'product_name',
+      'price',
+      'stock',
+      'category_id'
+    ],
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {
+        model: Category,
+        attributes: ['category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name'],
+        through: ProductTag,
+        as: 'tags'
+      }
+    ]
+  }).then(dbProdData => {
+    if (!dbProdData) {
+      res.status(404).json({ message: 'Id not found' });
+      return;
+    }
+    res.json(dbProdData)
+  })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+
   // be sure to include its associated Category and Tag data
 });
 
