@@ -15,7 +15,9 @@ Back-end for an e-Commerce site.
   - [Questions](#questions)
   
 ## Installation
-TBD
+To seed the database:  
+`npm run seed`  
+
   
 ## Usage
 TBD
