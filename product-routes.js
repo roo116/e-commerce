@@ -71,16 +71,8 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  Product.create({
-    product_name: req.body.product_name,
-    price: req.body.price,
-    stock: req.body.stock,
-    tagIds: [req.body.tag_id]
-  }
-  )
+  Product.create(req.body)
     .then((product) => {
-      console.log(product)
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
@@ -90,7 +82,6 @@ router.post('/', (req, res) => {
         });
         return ProductTag.bulkCreate(productTagIdArr);
       }
-      // if no product tags, just respond
       res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
@@ -99,25 +90,6 @@ router.post('/', (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// router.put('/:id', (req, res) => {
-//   // update a category by its `id` value
-//   Product.update(req.body, {
-//       where: {
-//       id: req.params.id
-//     }
-//   }).then(dbProdData => {
-//     if (!dbProdData) {
-//       res.status(404).json({ message: 'ID not found' });
-//       return;
-//     }
-//     res.json(dbProdData);
-//   })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
 
 // update product
 router.put("/:id", (req, res) => {
