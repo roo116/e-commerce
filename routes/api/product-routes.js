@@ -6,8 +6,6 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // get all products
 router.get("/", (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
   Product.findAll({
     attributes: ["id", "product_name", "price", "stock", "category_id"],
     include: [
@@ -32,7 +30,6 @@ router.get("/", (req, res) => {
 
 // get one product
 router.get("/:id", (req, res) => {
-  // find a single product by its `id`
   Product.findOne({
     attributes: ["id", "product_name", "price", "stock", "category_id"],
     where: {
@@ -62,8 +59,6 @@ router.get("/:id", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-
-  // be sure to include its associated Category and Tag data
 });
 
 // create new product
@@ -78,7 +73,6 @@ router.post('/', (req, res) => {
   */
   Product.create(req.body)
     .then((product) => {
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
@@ -88,7 +82,6 @@ router.post('/', (req, res) => {
         });
         return ProductTag.bulkCreate(productTagIdArr);
       }
-      // if no product tags, just respond
       res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
@@ -100,18 +93,15 @@ router.post('/', (req, res) => {
 
 // update product
 router.put("/:id", (req, res) => {
-  // update product data
   Product.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((product) => {
-      // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
     .then((productTags) => {
-      console.log(productTags);
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
@@ -136,7 +126,6 @@ router.put("/:id", (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
       res.status(400).json(err);
     });
 });

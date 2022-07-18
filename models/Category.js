@@ -1,6 +1,3 @@
-// Category has many Product models.
-
-
 const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
