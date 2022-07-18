@@ -1,7 +1,8 @@
 
   
-# Project Title - e-Commerce
-  
+# Project Title - e-Commerce  
+
+https://github.com/roo116/e-commerce  
   
 ## Project Description
 Back-end for an e-Commerce site.
@@ -34,9 +35,9 @@ To create the database, make sure MySQL is installed, and run this from the root
 `source db\schema.sql`  
 Set the sequelize sync statement to `true` in the server.js file, and then type `npm start` in a terminal to create the tables.  
 <img src='./screen-shots/screenshot1.png' style='width:400px'/>  
-Once tables are created, `ctrl-c` to stop the server and reset the sync statement to false. 
+Once tables are created, `ctrl-c` to stop the server and reset the sync statement to false.  
 Run `npm run seed` to put sample data into the tables.  
-then run `npm start` to restart the application server. 
+then run `npm start` to restart the application server.  
 
 
 Video to show the steps to get the database running:  
@@ -48,7 +49,7 @@ Video to show the steps to get the database running:
   
 ## Usage
 API routes have been set up to return product data from the database tables.  These API routes can be used for an application, or feel free to create your own.  
-This [video](https://drive.google.com/file/d/1LMBsrFtp5iTCHD4d_gq9v5AwKi4TnBTP/view?usp=sharing) shows examples of the functionality of the routes. 
+This [video](https://drive.google.com/file/d/1LMBsrFtp5iTCHD4d_gq9v5AwKi4TnBTP/view?usp=sharing) shows examples of the functionality of the routes.  
 
   
 ## License
@@ -59,14 +60,14 @@ See contact information below to find out how to contribute.
   
 ## Tests
 
-These criteria were tested and resolved correctly. 
+These criteria were tested and resolved correctly.  
 
 Acceptance criteria  
 AS A manager at an internet retail company  
 I WANT a back end for my e-commerce website that uses the latest technologies  
 SO THAT my company can compete with other e-commerce companies  
 
-PASSED:
+PASSED:  
 GIVEN a functional Express.js API  
 WHEN I add my database name, MySQL username, and MySQL password to an environment variable file
 THEN I am able to connect to a database using Sequelize  
